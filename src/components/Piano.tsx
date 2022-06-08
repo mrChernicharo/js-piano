@@ -1,4 +1,5 @@
-import { isFlat, playNote } from '../lib/tone.fns';
+import { UIEvent, useEffect, useRef } from 'react';
+import PianoKey from './PianoKey';
 
 const NOTES = [
 	'C0',
@@ -107,27 +108,35 @@ const NOTES = [
 	'C8',
 ];
 
-interface PianoKeyProps {
-	note: string;
-}
-
-const PianoKey = ({ note }: PianoKeyProps) => {
-	const isBemol = isFlat(note);
-
-	return (
-		<div
-			className={`${note} ${isBemol ? 'black' : 'white'} piano-key`}
-			onClick={() => playNote(note)}
-		></div>
-	);
-};
-
 export default function Piano() {
+	const pianoRef = useRef<HTMLDivElement>(null);
+
+	function handleScroll(e: UIEvent<HTMLDivElement>) {
+		const event = {
+			left: e.currentTarget.scrollLeft,
+			right: e.currentTarget.scrollWidth,
+		};
+
+		console.log('scrolled', event);
+	}
+
+	useEffect(() => {
+		if (pianoRef) {
+			pianoRef.current?.scrollTo({
+				left: pianoRef.current?.scrollWidth / 3,
+			});
+		}
+	}, []);
+
 	return (
-		<div className="piano">
-			{NOTES.map(note => (
-				<PianoKey note={note} />
-			))}
-		</div>
+		<>
+			<div ref={pianoRef} className="piano" onScroll={handleScroll}>
+				{NOTES.map(note => (
+					<PianoKey key={note} note={note} />
+				))}
+			</div>
+
+			<div className="piano-mat"></div>
+		</>
 	);
 }

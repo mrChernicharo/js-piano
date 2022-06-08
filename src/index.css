@@ -28,6 +28,7 @@ div {
 	border: 1px solid;
 	min-width: var(--key-width);
 	height: var(--piano-height);
+	transition: 0.5s;
 }
 
 .white.piano-key {
@@ -42,4 +43,8 @@ div {
 	z-index: 2;
 	margin-left: calc(calc(var(--key-width) * 0.25) * -1);
 	margin-right: calc(calc(var(--key-width) * 0.25) * -1);
+}
+
+.active.piano-key {
+	background-color: lightblue;
 }
