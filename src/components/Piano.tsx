@@ -1,4 +1,4 @@
-import { UIEvent, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import PianoKey from './PianoKey';
 
 const NOTES = [
@@ -109,34 +109,38 @@ const NOTES = [
 ];
 
 export default function Piano() {
-	const pianoRef = useRef<HTMLDivElement>(null);
+	const keyboardRef = useRef<HTMLDivElement>(null);
 
-	function handleScroll(e: UIEvent<HTMLDivElement>) {
-		const event = {
-			left: e.currentTarget.scrollLeft,
-			right: e.currentTarget.scrollWidth,
-		};
+	function handleScroll(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		const { scrollLeft } = keyboardRef.current!;
 
-		console.log('scrolled', event);
+		console.log(
+			'scrolled',
+			event,
+			keyboardRef.current?.scrollLeft,
+			scrollLeft
+		);
 	}
 
 	useEffect(() => {
-		if (pianoRef) {
-			pianoRef.current?.scrollTo({
-				left: pianoRef.current?.scrollWidth / 3,
+		if (keyboardRef) {
+			keyboardRef.current?.scrollTo({
+				left: keyboardRef.current?.scrollWidth / 3,
 			});
 		}
 	}, []);
 
 	return (
-		<>
-			<div ref={pianoRef} className="piano" onScroll={handleScroll}>
+		<div ref={keyboardRef} className="piano" onScroll={handleScroll}>
+			<div className="keyboard">
 				{NOTES.map(note => (
 					<PianoKey key={note} note={note} />
 				))}
 			</div>
 
 			<div className="piano-mat"></div>
-		</>
+		</div>
 	);
 }

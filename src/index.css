@@ -1,5 +1,5 @@
 :root {
-	--piano-height: min(60vh, 500px);
+	--piano-height: min(40vh, 500px);
 	--key-width: 60px;
 }
 
@@ -17,11 +17,15 @@ div {
 }
 
 .piano {
+	border: 1px solid rgb(81, 207, 224);
 	width: 100vw;
-	height: calc(var(--piano-height) + 15px);
+	height: calc(var(--piano-height) * 1.25);
 	overflow-x: scroll;
+}
+
+.keyboard {
+	height: var(--piano-height);
 	display: flex;
-	position: relative;
 }
 
 .piano-key {
@@ -33,6 +37,7 @@ div {
 
 .white.piano-key {
 	background-color: white;
+	height: calc(var(--piano-height) * 0.96);
 }
 
 .black.piano-key {
