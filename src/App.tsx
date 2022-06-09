@@ -1,3 +1,4 @@
+import MiniKeyboard from './components/MiniKeyboard';
 import Piano from './components/Piano';
 import './index.css';
 
@@ -7,6 +8,8 @@ function App() {
 			<h1>JS Piano</h1>
 
 			<Piano />
+
+			<MiniKeyboard />
 		</div>
 	);
 }

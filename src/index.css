@@ -1,6 +1,11 @@
 :root {
 	--piano-height: min(40vh, 500px);
+	--mini-piano-height: min(10vh, 50px);
 	--key-width: 60px;
+	--mini-key-width: 6px;
+	--text-light: #dcdcdc;
+	--text-medium: #676767;
+	--text-dark: #333;
 }
 
 body {
@@ -23,8 +28,17 @@ div {
 	overflow-x: scroll;
 }
 
+.mini-keyboard-container {
+	height: var(--mini-piano-height);
+	border: 1px solid;
+}
+
 .keyboard {
 	height: var(--piano-height);
+	display: flex;
+}
+
+.mini-keyboard {
 	display: flex;
 }
 
@@ -35,19 +49,41 @@ div {
 	transition: 0.5s;
 }
 
+.mini-piano-key {
+	border-left: 1px solid var(--text-light);
+	border-bottom: 1px solid var(--text-light);
+	height: var(--mini-piano-height * 0.94);
+	width: 100%;
+}
+
 .white.piano-key {
 	background-color: white;
 	height: calc(var(--piano-height) * 0.96);
 }
 
+.white.mini-piano-key {
+	background-color: white;
+	height: calc(var(--mini-piano-height) * 0.96);
+}
+
 .black.piano-key {
-	position: relative;
 	background-color: black;
 	height: calc(var(--piano-height) * 0.7);
 	min-width: calc(var(--key-width) * 0.5);
 	z-index: 2;
 	margin-left: calc(calc(var(--key-width) * 0.25) * -1);
 	margin-right: calc(calc(var(--key-width) * 0.25) * -1);
+}
+
+.black.mini-piano-key {
+	background-color: black;
+	position: relative;
+	height: calc(var(--mini-piano-height) * 0.7);
+	margin-left: -5px;
+	margin-right: -5px;
+	z-index: 2;
+	margin-left: calc(calc(var(--mini-key-width) * 0.5) * -1);
+	margin-right: calc(calc(var(--mini-key-width) * 1.2) * -1);
 }
 
 .active.piano-key {
