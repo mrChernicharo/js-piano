@@ -31,6 +31,7 @@ div {
 .mini-keyboard-container {
 	height: var(--mini-piano-height);
 	border: 1px solid;
+	position: relative;
 }
 
 .keyboard {
@@ -88,4 +89,14 @@ div {
 
 .active.piano-key {
 	background-color: lightblue;
+}
+
+.brush {
+	height: var(--mini-piano-height);
+	width: 212px;
+	background-color: var(--text-medium);
+	opacity: 0.3;
+	position: absolute;
+	z-index: 4;
+	top: 0;
 }
