@@ -9,10 +9,7 @@ export default function MiniKeyboard() {
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const { width: containerWidth } =
-			containerRef.current?.getBoundingClientRect()!;
-
-		setKeyboardWidth(containerWidth);
+		setKeyboardWidth(containerRef.current?.getBoundingClientRect().width!);
 	}, []);
 
 	return (
