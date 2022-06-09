@@ -112,8 +112,6 @@ export default function Piano() {
 	const keyboardRef = useRef<HTMLDivElement>(null);
 
 	function handleScroll(e) {
-		e.preventDefault();
-		e.stopPropagation();
 		const { scrollLeft } = keyboardRef.current!;
 
 		console.log(

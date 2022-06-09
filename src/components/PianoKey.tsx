@@ -1,4 +1,4 @@
-import { PointerEvent, useState } from 'react';
+import { PointerEvent, useCallback, useState } from 'react';
 import { isFlat, playNote } from '../lib/tone.fns';
 
 interface PianoKeyProps {
@@ -9,20 +9,20 @@ const PianoKey = ({ note }: PianoKeyProps) => {
 	const isBemol = isFlat(note);
 	const [isActive, setIsActive] = useState(false);
 
-	function handlePlayNote(note) {
+	const handlePlayNote = useCallback(note => {
 		setIsActive(true);
 		playNote(note);
 		setTimeout(() => setIsActive(false), 500);
-	}
+	}, []);
 
 	function handleKeyPressed(e: PointerEvent<HTMLDivElement>) {
-		console.log(e);
+		// console.log(e);
 		handlePlayNote(note);
 	}
 
 	function handleKeySlurredAcross(e: PointerEvent<HTMLDivElement>) {
 		if (e.buttons !== 1) return;
-		console.log(e);
+		// console.log(e);
 		handlePlayNote(note);
 	}
 
